@@ -1,0 +1,23 @@
+def maxEarnings(n, jobs):
+    jobs = sorted(jobs, key=lambda x: x[1])
+    selected = []
+    last_end_time = 0
+    for start, end, profit in jobs:
+        if start >= last_end_time:
+            selected.append(profit)
+            last_end_time = end
+    return [n - len(selected), sum(selected)]
+
+if _name_ == "_main_":
+    n = int(input("Enter the number of Jobs: "))
+    jobs = []
+    print("Enter job start time, end time, and earnings:")
+    for i in range(n):
+        start = int(input().strip())
+        end = int(input().strip())
+        profit = int(input().strip())
+        jobs.append((start, end, profit))
+    result = maxEarnings(n+1, jobs)
+    print("The number of tasks and earnings available for others")
+    print("Task:", result[0])
+    print("Earnings:", result[1])
